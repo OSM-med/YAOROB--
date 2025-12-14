@@ -9,7 +9,7 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: "Arial", sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #fdfdfd;
             color: #111;
         }
@@ -17,7 +17,6 @@
         .header {
             width: 100%;
             background-color: #f5f5f5;
-            padding: 0;
             text-align: center;
             border-bottom: 1px solid #ddd;
         }
@@ -31,56 +30,68 @@
 
         .title-block {
             text-align: center;
-            padding: 30px 20px 10px 20px;
+            padding: 36px 20px 12px 20px;
         }
 
         .title-block h1 {
-            font-size: 36px;
+            font-size: 38px;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
+            letter-spacing: 0.3px;
         }
 
         .title-block p {
-            font-size: 18px;
-            color: #444;
+            font-size: 20px;
+            font-weight: 600;
+            color: #222;
             margin-top: 0;
+            line-height: 1.4;
         }
 
         .main-button {
             display: block;
             width: 80%;
-            max-width: 480px;
-            margin: 40px auto;
-            padding: 20px 30px;
-            background-color: #1a1a1a;
+            max-width: 520px;
+            margin: 48px auto;
+            padding: 22px 32px;
+            background-color: #111;
             color: white;
             text-align: center;
-            border-radius: 10px;
-            font-size: 22px;
+            border-radius: 12px;
+            font-size: 23px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 0.4px;
             transition: 0.25s;
         }
 
         .main-button:hover {
             background-color: #000;
-            transform: scale(1.02);
+            transform: scale(1.03);
         }
     </style>
 </head>
 
 <body>
 
+    <!-- Шапка -->
     <div class="header">
-        <img src="yaorob-sketch.png.png" alt="Карандашная зарисовка корпуса">
+        <img src="yaokob-main.png" alt="Корпус ЯОКОБ">
     </div>
 
+    <!-- Заголовок -->
     <div class="title-block">
         <h1>Рекомендации для пациентов</h1>
-        <p>Информационный ресурс для тех, кто проходит лечение в Ярославской областной онкологической больнице</p>
+        <p>
+            Информационный ресурс для пациентов<br>
+            Ярославской областной онкологической больницы
+        </p>
     </div>
 
-    <a href="#" class="main-button">Перейти к рекомендациям</a>
+    <!-- Кнопка перехода -->
+    <a href="recommendations.html" class="main-button">
+        Перейти к рекомендациям
+    </a>
 
 </body>
 </html>
