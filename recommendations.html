@@ -28,7 +28,7 @@
             padding: 14px 18px 14px 44px;
             font-size: 17px;
             border-radius: 28px;
-            border: 2px solid #111;
+            border: 2px solid #8fbce6;
             outline: none;
         }
 
@@ -41,23 +41,24 @@
             font-size: 18px;
         }
 
-        /* ===== Сетка иконок ===== */
+        /* ===== Сетка ===== */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 18px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* ===== Карточка заболевания (ССЫЛКА) ===== */
+        /* ===== Карточка патологии ===== */
         .card {
-            background-color: #111;
-            color: #ffffff;
-            border-radius: 14px;
-            padding: 22px 16px;
+            background-color: #ffffff;
+            color: #111;
+            border: 2px solid #8fbce6;
+            border-radius: 16px;
+            padding: 20px 16px;
             text-align: center;
-            font-size: 17px;
+            font-size: 15.5px;
             font-weight: 800;
             text-decoration: none;
             transition: 0.2s ease;
@@ -65,15 +66,14 @@
         }
 
         .card:hover {
-            background-color: #000;
+            background-color: #f4f9ff;
             transform: translateY(-2px);
         }
 
-        /* ===== Адаптация под телефон ===== */
         @media (max-width: 480px) {
             body { padding: 12px; }
             .grid { gap: 14px; }
-            .card { font-size: 16px; padding: 20px 14px; }
+            .card { font-size: 15px; padding: 18px 14px; }
         }
     </style>
 </head>
@@ -85,49 +85,74 @@
         <input type="text" id="searchInput" placeholder="Введите название заболевания">
     </div>
 
-    <!-- Иконки заболеваний -->
+    <!-- Список патологий -->
     <div class="grid" id="pathologyGrid">
 
-        <!-- А -->
-        <a href="pathology.html?p=adenokarcinoma-zheludka" class="card">Аденокарцинома желудка</a>
-        <a href="pathology.html?p=adenokarcinoma-pischevoda" class="card">Аденокарцинома пищевода</a>
+        <a href="pathology.html?p=nsclc" class="card">Немелкоклеточный рак лёгкого</a>
+        <a href="pathology.html?p=sclc" class="card">Мелкоклеточный рак лёгкого</a>
 
-        <!-- Б -->
-        <a href="pathology.html?p=bronholegochny-rak" class="card">Бронхолёгочный рак</a>
+        <a href="pathology.html?p=mesothelioma" class="card">Мезотелиома плевры, брюшины и других локализаций</a>
+        <a href="pathology.html?p=lung_net" class="card">Нейроэндокринные неоплазии лёгких и тимуса</a>
+        <a href="pathology.html?p=thymic_tumors" class="card">Тимические эпителиальные опухоли</a>
 
-        <!-- Г -->
-        <a href="pathology.html?p=gepatozellulyarny-rak" class="card">Гепатоцеллюлярный рак</a>
+        <a href="pathology.html?p=head_neck" class="card">Опухоли головы и шеи</a>
 
-        <!-- К -->
-        <a href="pathology.html?p=kolorektalny-rak" class="card">Колоректальный рак</a>
-        <a href="pathology.html?p=karcinoma-podzheludochnoy" class="card">Карцинома поджелудочной железы</a>
+        <a href="pathology.html?p=cns_primary" class="card">Первичные опухоли центральной нервной системы</a>
+        <a href="pathology.html?p=cns_metastatic" class="card">Метастатическое поражение центральной нервной системы</a>
 
-        <!-- М -->
-        <a href="pathology.html?p=melanoma" class="card">Меланома</a>
+        <a href="pathology.html?p=esophagogastric" class="card">Рак пищевода и пищеводно-желудочного перехода</a>
+        <a href="pathology.html?p=gastric" class="card">Рак желудка</a>
 
-        <!-- Р -->
-        <a href="pathology.html?p=rak-zheludka" class="card">Рак желудка</a>
-        <a href="pathology.html?p=rak-legkogo" class="card">Рак лёгкого</a>
-        <a href="pathology.html?p=rak-molochnoy-zhelezy" class="card">Рак молочной железы</a>
-        <a href="pathology.html?p=rak-pischevoda" class="card">Рак пищевода</a>
-        <a href="pathology.html?p=rak-predstatelnoy-zhelezy" class="card">Рак предстательной железы</a>
+        <a href="pathology.html?p=colorectal" class="card">Рак ободочной кишки, ректосигмоидного соединения и прямой кишки</a>
+        <a href="pathology.html?p=small_bowel" class="card">Рак тонкой кишки и ампулы Фатерова сосочка</a>
+        <a href="pathology.html?p=anal_canal" class="card">Рак анального канала и кожи перианальной области</a>
 
-        <!-- Я -->
-        <a href="pathology.html?p=yaichnikovyi-rak" class="card">Яичниковый рак</a>
+        <a href="pathology.html?p=liver_biliary" class="card">Злокачественные опухоли печени и желчевыводящей системы</a>
+        <a href="pathology.html?p=pancreatic" class="card">Рак поджелудочной железы</a>
+
+        <a href="pathology.html?p=gist" class="card">Гастроинтестинальные стромальные опухоли</a>
+        <a href="pathology.html?p=gi_net" class="card">Нейроэндокринные неоплазии ЖКТ и поджелудочной железы</a>
+
+        <a href="pathology.html?p=pmp" class="card">Псевдомиксома брюшины</a>
+        <a href="pathology.html?p=adrenal" class="card">Рак коры надпочечников</a>
+
+        <a href="pathology.html?p=breast" class="card">Рак молочной железы</a>
+
+        <a href="pathology.html?p=ovarian" class="card">Рак яичников, первичный рак брюшины и рак маточных труб</a>
+        <a href="pathology.html?p=ovarian_non_epithelial" class="card">Злокачественные неэпителиальные опухоли яичников</a>
+        <a href="pathology.html?p=ovarian_borderline" class="card">Пограничные опухоли яичников</a>
+
+        <a href="pathology.html?p=cervical" class="card">Рак шейки матки</a>
+        <a href="pathology.html?p=endometrial" class="card">Рак тела матки и саркомы матки</a>
+        <a href="pathology.html?p=trophoblastic" class="card">Злокачественные трофобластические опухоли</a>
+
+        <a href="pathology.html?p=renal" class="card">Почечноклеточный рак</a>
+        <a href="pathology.html?p=bladder" class="card">Рак мочевого пузыря</a>
+        <a href="pathology.html?p=prostate" class="card">Рак предстательной железы</a>
+
+        <a href="pathology.html?p=germ_cell_male" class="card">Герминогенные опухоли у мужчин</a>
+
+        <a href="pathology.html?p=melanoma" class="card">Меланома кожи</a>
+        <a href="pathology.html?p=non_melanoma_skin" class="card">Злокачественные немеланоцитарные опухоли кожи</a>
+
+        <a href="pathology.html?p=bone" class="card">Первичные злокачественные опухоли костей</a>
+        <a href="pathology.html?p=soft_tissue_sarcoma" class="card">Саркомы мягких тканей</a>
+
+        <a href="pathology.html?p=cup" class="card">Опухоли невыявленной первичной локализации</a>
 
     </div>
 
-    <!-- Логика поиска -->
+    <!-- Поиск -->
     <script>
         const searchInput = document.getElementById("searchInput");
         const cards = document.querySelectorAll(".card");
 
         searchInput.addEventListener("input", function () {
             const value = this.value.toLowerCase().trim();
-
             cards.forEach(card => {
-                const text = card.textContent.toLowerCase();
-                card.style.display = text.includes(value) ? "block" : "none";
+                card.style.display = card.textContent.toLowerCase().includes(value)
+                    ? "block"
+                    : "none";
             });
         });
     </script>
