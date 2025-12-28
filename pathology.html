@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Выбор заболевания</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <title>Рекомендации</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       margin: 0;
@@ -13,16 +12,23 @@
       background-color: #ffffff;
       color: #111;
     }
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
+    .container { max-width: 980px; margin: 0 auto; }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 18px;
+      text-decoration: none;
+      color: #111;
+      font-weight: 600;
     }
+
     h1 {
       text-align: center;
       font-size: 30px;
       font-weight: 800;
-      margin: 10px 0 22px 0;
+      margin-bottom: 22px;
     }
+
     .question-box {
       background-color: #f4f9ff;
       border: 2px solid #8fbce6;
@@ -30,19 +36,21 @@
       padding: 22px 18px;
       margin-bottom: 22px;
     }
+
     .question-box-title {
       text-align: center;
       font-size: 18px;
       font-weight: 800;
       margin-bottom: 14px;
     }
+
     .questions {
       display: grid;
       grid-template-columns: 1fr;
       gap: 12px;
     }
+
     .question {
-      display: block;
       background-color: #ffffff;
       border: 2px solid #8fbce6;
       border-radius: 14px;
@@ -53,40 +61,332 @@
       cursor: pointer;
       transition: 0.2s ease;
       user-select: none;
-      text-decoration: none;
-      color: #111;
     }
-    .question:hover {
-      background-color: #e9f3ff;
+    .question:hover { background-color: #e9f3ff; }
+    .question.active {
+      background-color: #111;
+      color: #ffffff;
+      border-color: #111;
+    }
+
+    .content {
+      background-color: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+    .content h2 { font-size: 22px; font-weight: 800; margin-bottom: 10px; }
+    .content p, .content li { font-size: 16px; line-height: 1.6; }
+    .content ul { padding-left: 18px; }
+
+    /* ===== Окно выбора операции (центрируем) ===== */
+    .op-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 14px 0 0 0;
+    }
+    .op-box {
+      width: 100%;
+      max-width: 720px;
+      background: #5aa7de;
+      color: #fff;
+      border-radius: 18px;
+      padding: 18px 16px;
+    }
+    .op-title {
+      text-align: center;
+      font-size: 17px;
+      font-weight: 900;
+      margin: 0 0 12px 0;
+      letter-spacing: 0.2px;
+    }
+    .op-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .op-btn {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.85);
+      border-radius: 14px;
+      padding: 12px 12px;
+      font-size: 15.5px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .op-btn:hover {
+      background: rgba(255,255,255,0.14);
       transform: translateY(-1px);
+    }
+    .op-btn.active {
+      background: #ffffff;
+      color: #0b2a44;
+      border-color: #ffffff;
+    }
+
+    /* ===== Пост-операционные разделы ===== */
+    .postop-wrap {
+      margin-top: 18px;
     }
 
     @media (max-width: 480px) {
       body { padding: 12px; }
       h1 { font-size: 26px; }
       .question { font-size: 15.5px; }
+      .op-btn { font-size: 15px; }
     }
   </style>
 </head>
 
 <body>
-<div class="container">
+  <div class="container">
 
-  <h1>Выбор заболевания</h1>
+    <a href="recommendations.html" class="back-link">← Вернуться к выбору заболевания</a>
+    <h1 id="pathologyTitle">Рекомендации</h1>
 
-  <div class="question-box">
-    <div class="question-box-title">Выберите заболевание, чтобы открыть рекомендации</div>
+    <!-- ВАЖНО: тут больше НЕТ выбора патологии. Только пункты разделов. -->
+    <div class="question-box">
+      <div class="question-box-title">Выберите, какая информация вам сейчас нужна</div>
 
-    <div class="questions">
-      <!-- Рак желудка -->
-      <a class="question" href="gastric.html?p=gastric">Рак желудка</a>
+      <div class="questions" id="mainQuestions">
+        <div class="question" data-key="about">Ознакомиться с данной патологией</div>
 
-      <!-- Заготовки под будущие страницы (когда добавишь файлы) -->
-      <!-- <a class="question" href="esophagus.html?p=esophagus">Рак пищевода</a> -->
-      <!-- <a class="question" href="lung.html?p=lung">Рак лёгкого</a> -->
+        <div class="question" data-key="chemo">Исследования перед госпитализацией на химиотерапию</div>
+        <div class="question" data-key="post_chemo">Рекомендации после курса химиотерапии</div>
+
+        <div class="question" data-key="surgery">Исследования перед госпитализацией для хирургического лечения</div>
+        <div class="question" data-key="post_surgery">Рекомендации после хирургического лечения</div>
+
+        <div class="question" data-key="rt">Исследования перед госпитализацией для лучевой терапии</div>
+        <div class="question" data-key="post_rt">Рекомендации после лучевого лечения</div>
+
+        <div class="question" data-key="followup">
+          Наблюдение после завершения лечения.
+          Какие обследования нужно проходить и с какой периодичностью
+        </div>
+      </div>
     </div>
+
+    <div class="content" id="content">
+      <h2>Выберите пункт выше</h2>
+      <p>После выбора раздела здесь появятся рекомендации.</p>
+    </div>
+
   </div>
 
-</div>
+  <script>
+    const DATA = {
+      gastric: {
+        title: "Рак желудка",
+
+        about: `
+          <h2>О заболевании</h2>
+          <p>Рак желудка — злокачественное заболевание, лечение которого может включать хирургическое вмешательство, химиотерапию и лучевую терапию.</p>
+        `,
+
+        chemo: `
+          <h2>Перед госпитализацией на химиотерапию</h2>
+          <p>Раздел будет заполнен.</p>
+        `,
+
+        post_chemo: `
+          <h2>Рекомендации после курса химиотерапии</h2>
+          <ul>
+            <li>при температуре ≥38°C — срочно обратиться к врачу</li>
+            <li>контроль самочувствия и побочных эффектов</li>
+            <li>дробное питание, достаточный питьевой режим</li>
+          </ul>
+        `,
+
+        surgery: `
+          <h2>Перед госпитализацией для хирургического лечения</h2>
+          <p>Раздел будет заполнен.</p>
+        `,
+
+        rt: `
+          <h2>Перед госпитализацией для лучевой терапии</h2>
+          <p>Раздел будет заполнен.</p>
+        `,
+
+        post_rt: `
+          <h2>Рекомендации после лучевого лечения</h2>
+          <ul>
+            <li>уход за кожей в зоне облучения</li>
+            <li>избегать солнечного воздействия</li>
+            <li>сообщать врачу о боли, слабости, нарушении глотания</li>
+          </ul>
+        `,
+
+        followup: `
+          <h2>Наблюдение после завершения лечения</h2>
+          <ul>
+            <li><strong>1–2 годы:</strong> осмотр каждые 3–6 месяцев</li>
+            <li><strong>3–5 годы:</strong> каждые 6–12 месяцев</li>
+            <li><strong>после 5 лет:</strong> ежегодно</li>
+          </ul>
+        `
+      }
+    };
+
+    // --- ссылки на отдельные страницы питания ---
+    const DIET_PAGES = {
+      distal: "diet-distal.html" // Субтотальная дистальная резекция желудка
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const key = params.get("p") || "gastric";
+
+    const titleEl = document.getElementById("pathologyTitle");
+    const contentEl = document.getElementById("content");
+    const questions = document.querySelectorAll("#mainQuestions .question");
+
+    // Состояния, чтобы кнопки “после операции” работали предсказуемо
+    let selectedOp = null;
+
+    function centerElement(el) {
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function renderOperationSelector() {
+      contentEl.innerHTML = `
+        <h2>Рекомендации после хирургического лечения</h2>
+
+        <div class="op-wrap" id="opWrap">
+          <div class="op-box">
+            <div class="op-title">Выберите, какая операция выполнена</div>
+            <div class="op-grid">
+              <button class="op-btn" data-op="distal">Субтотальная дистальная резекция желудка</button>
+              <button class="op-btn" data-op="proximal">Проксимальная резекция желудка</button>
+              <button class="op-btn" data-op="gastrectomy">Гастрэктомия</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="postop-wrap" id="postOpWrap"></div>
+      `;
+
+      const opWrap = document.getElementById("opWrap");
+      centerElement(opWrap);
+
+      const btns = contentEl.querySelectorAll(".op-btn");
+      btns.forEach(b => {
+        b.addEventListener("click", () => {
+          btns.forEach(x => x.classList.remove("active"));
+          b.classList.add("active");
+          selectedOp = b.dataset.op;
+          renderPostOpSections(selectedOp);
+        });
+      });
+    }
+
+    function renderPostOpSections(opKey) {
+      const wrap = document.getElementById("postOpWrap");
+      if (!wrap) return;
+
+      const opLabel = {
+        distal: "Субтотальная дистальная резекция желудка",
+        proximal: "Проксимальная резекция желудка",
+        gastrectomy: "Гастрэктомия"
+      }[opKey] || "Операция";
+
+      wrap.innerHTML = `
+        <div class="question-box" id="postOpBox">
+          <div class="question-box-title">${opLabel}: выберите раздел рекомендаций</div>
+          <div class="questions">
+            <div class="question post-op" data-post="activity">Рекомендации по физической активности</div>
+            <div class="question post-op" data-post="nutrition">Рекомендации по питанию</div>
+            <div class="question post-op" data-post="meds">Рекомендации по приёму лекарственных препаратов</div>
+            <div class="question post-op" data-post="followup">Рекомендации по наблюдению после операции</div>
+          </div>
+        </div>
+
+        <div class="content" id="postOpContent">
+          <p>Выберите раздел выше.</p>
+        </div>
+      `;
+
+      centerElement(document.getElementById("postOpBox"));
+
+      const postBtns = wrap.querySelectorAll(".post-op");
+      const postContent = document.getElementById("postOpContent");
+
+      postBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          postBtns.forEach(x => x.classList.remove("active"));
+          btn.classList.add("active");
+
+          const sec = btn.dataset.post;
+
+          // питание для distal — отдельной страницей
+          if (sec === "nutrition" && opKey === "distal") {
+            window.location.href = DIET_PAGES.distal + "?from=pathology&p=" + encodeURIComponent(key);
+            return;
+          }
+
+          // остальное — пока заглушки (можешь потом вынести аналогично в файлы)
+          if (sec === "activity") {
+            postContent.innerHTML = `
+              <h2>Физическая активность</h2>
+              <ul>
+                <li>в первые недели — щадящий режим и прогулки по переносимости</li>
+                <li>избегать подъёма тяжестей и резких нагрузок</li>
+                <li>увеличивать активность постепенно, по согласованию с врачом</li>
+              </ul>
+            `;
+          } else if (sec === "meds") {
+            postContent.innerHTML = `
+              <h2>Лекарственные препараты</h2>
+              <ul>
+                <li>принимать препараты строго по назначениям врача</li>
+                <li>не менять дозы и не добавлять новые лекарства самостоятельно</li>
+                <li>при побочных эффектах — сообщить лечащему врачу</li>
+              </ul>
+            `;
+          } else if (sec === "followup") {
+            postContent.innerHTML = `
+              <h2>Наблюдение после хирургической операции</h2>
+              <ul>
+                <li>контрольные осмотры — по графику, выданному хирургом/онкологом</li>
+                <li>контроль нутритивного статуса (вес, аппетит, переносимость еды)</li>
+                <li>при нарастании боли, температуре, рвоте, чёрном стуле, выраженной слабости — обратиться за медицинской помощью</li>
+              </ul>
+            `;
+          } else {
+            postContent.innerHTML = "<p>Раздел будет добавлен позже.</p>";
+          }
+
+          centerElement(postContent);
+        });
+      });
+    }
+
+    // --- инициализация страницы ---
+    if (!DATA[key]) {
+      titleEl.textContent = "Раздел в разработке";
+      contentEl.innerHTML = "<p>Информация для данной патологии будет добавлена.</p>";
+    } else {
+      titleEl.textContent = DATA[key].title;
+
+      questions.forEach(q => {
+        q.addEventListener("click", () => {
+          questions.forEach(x => x.classList.remove("active"));
+          q.classList.add("active");
+
+          const section = q.dataset.key;
+
+          if (section === "post_surgery") {
+            renderOperationSelector();
+            return;
+          }
+
+          contentEl.innerHTML = DATA[key][section] || "<p>Раздел будет добавлен позже.</p>";
+          centerElement(contentEl);
+        });
+      });
+    }
+  </script>
 </body>
 </html>
