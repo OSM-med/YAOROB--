@@ -259,11 +259,7 @@
       }
     };
 
-    const DIET_PAGES = {
-      distal: "diet-distal.html"
-    };
-
-    // ✅ новый файл активности (единый для всех операций при раке желудка)
+    const DIET_PAGES = { distal: "diet-distal.html" };
     const ACTIVITY_PAGE = "activity-gastric-postop.html";
 
     const params = new URLSearchParams(window.location.search);
@@ -273,32 +269,27 @@
     const contentEl = document.getElementById("content");
     const questions = document.querySelectorAll("#mainQuestions .question");
 
-    let selectedOp = null;
-
-    function centerElement(el) {
+    function centerElement(el){
       if (!el) return;
-      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      el.scrollIntoView({ behavior:"smooth", block:"center" });
     }
 
-    function currentReturnUrl() {
-      // вернёмся сюда же: pathology.html?p=gastric (и т.д.)
+    function currentReturnUrl(){
       const file = window.location.pathname.split("/").pop() || "pathology.html";
       return file + window.location.search;
     }
 
-    function openActivityForGastric() {
-      // открываем единый файл активности и передаём return
+    function openActivity(){
       window.location.href = ACTIVITY_PAGE + "?return=" + encodeURIComponent(currentReturnUrl());
     }
 
-    function renderOperationSelector() {
+    function renderOperationSelector(){
       contentEl.innerHTML = `
         <h2>Рекомендации после хирургического лечения</h2>
 
         <div class="op-wrap" id="opWrap">
           <div class="op-box">
 
-            <!-- ✅ “ЖЕЛЕЗОБЕТОН”: заголовок в рамке -->
             <div class="op-title" style="
               text-align:center;
               font-size:18px;
@@ -327,24 +318,23 @@
       centerElement(document.getElementById("opWrap"));
 
       const btns = contentEl.querySelectorAll(".op-btn");
-      btns.forEach(b => {
-        b.addEventListener("click", () => {
-          btns.forEach(x => x.classList.remove("active"));
+      btns.forEach(b=>{
+        b.addEventListener("click", ()=>{
+          btns.forEach(x=>x.classList.remove("active"));
           b.classList.add("active");
-          selectedOp = b.dataset.op;
-          renderPostOpSections(selectedOp);
+          renderPostOpSections(b.dataset.op);
         });
       });
     }
 
-    function renderPostOpSections(opKey) {
+    function renderPostOpSections(opKey){
       const wrap = document.getElementById("postOpWrap");
       if (!wrap) return;
 
       const opLabel = {
-        distal: "Субтотальная дистальная резекция желудка",
-        proximal: "Проксимальная резекция желудка",
-        gastrectomy: "Гастрэктомия"
+        distal:"Субтотальная дистальная резекция желудка",
+        proximal:"Проксимальная резекция желудка",
+        gastrectomy:"Гастрэктомия"
       }[opKey] || "Операция";
 
       wrap.innerHTML = `
@@ -365,72 +355,50 @@
 
       centerElement(document.getElementById("postOpBox"));
 
-      const postBtns = wrap.querySelectorAll(".post-op");
-      const postContent = document.getElementById("postOpContent");
+      // ✅ Делегирование: клики ловим одним обработчиком (не ломается при перерисовке)
+      wrap.addEventListener("click", (e)=>{
+        const btn = e.target.closest(".post-op");
+        if (!btn) return;
 
-      postBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          postBtns.forEach(x => x.classList.remove("active"));
-          btn.classList.add("active");
+        const sec = btn.dataset.post;
 
-          const sec = btn.dataset.post;
+        // подсветка активной кнопки
+        wrap.querySelectorAll(".post-op").forEach(x=>x.classList.remove("active"));
+        btn.classList.add("active");
 
-          // ✅ ВАЖНО: активность после ЛЮБОЙ операции при РЖ -> отдельный файл
-          if (sec === "activity" && key === "gastric") {
-            openActivityForGastric();
-            return;
-          }
+        // ✅ Физическая активность -> ВСЕГДА в отдельный файл
+        if (sec === "activity"){
+          openActivity();
+          return;
+        }
 
-          // питание для distal — отдельной страницей
-          if (sec === "nutrition" && opKey === "distal") {
-            window.location.href = DIET_PAGES.distal + "?from=pathology&p=" + encodeURIComponent(key);
-            return;
-          }
+        // питание для distal — отдельной страницей (как было)
+        if (sec === "nutrition" && opKey === "distal"){
+          window.location.href = DIET_PAGES.distal + "?from=pathology&p=" + encodeURIComponent(key);
+          return;
+        }
 
-          // остальное — заглушки (как было)
-          if (sec === "meds") {
-            postContent.innerHTML = `
-              <h2>Лекарственные препараты</h2>
-              <ul>
-                <li>принимать препараты строго по назначениям врача</li>
-                <li>не менять дозы и не добавлять новые лекарства самостоятельно</li>
-                <li>при побочных эффектах — сообщить лечащему врачу</li>
-              </ul>
-            `;
-          } else if (sec === "followup") {
-            postContent.innerHTML = `
-              <h2>Наблюдение после хирургической операции</h2>
-              <ul>
-                <li>контрольные осмотры — по графику, выданному хирургом/онкологом</li>
-                <li>контроль нутритивного статуса (вес, аппетит, переносимость еды)</li>
-                <li>при нарастании боли, температуре, рвоте, чёрном стуле, выраженной слабости — обратиться за медицинской помощью</li>
-              </ul>
-            `;
-          } else if (sec === "nutrition") {
-            postContent.innerHTML = "<p>Раздел будет добавлен позже.</p>";
-          } else {
-            postContent.innerHTML = "<p>Раздел будет добавлен позже.</p>";
-          }
-
-          centerElement(postContent);
-        });
-      });
+        const postContent = document.getElementById("postOpContent");
+        if (!postContent) return;
+        postContent.innerHTML = "<p>Раздел будет добавлен позже.</p>";
+        centerElement(postContent);
+      }, { once:true }); // ✅ чтобы не накапливать обработчики при повторном выборе операции
     }
 
-    if (!DATA[key]) {
+    if (!DATA[key]){
       titleEl.textContent = "Раздел в разработке";
       contentEl.innerHTML = "<p>Информация для данной патологии будет добавлена.</p>";
     } else {
       titleEl.textContent = DATA[key].title;
 
-      questions.forEach(q => {
-        q.addEventListener("click", () => {
-          questions.forEach(x => x.classList.remove("active"));
+      questions.forEach(q=>{
+        q.addEventListener("click", ()=>{
+          questions.forEach(x=>x.classList.remove("active"));
           q.classList.add("active");
 
           const section = q.dataset.key;
 
-          if (section === "post_surgery") {
+          if (section === "post_surgery"){
             renderOperationSelector();
             return;
           }
