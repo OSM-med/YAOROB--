@@ -11,15 +11,13 @@
       --soft2:#e9f3ff;
       --text:#111;
       --shadow:0 8px 20px rgba(0,0,0,0.06);
-      --opBlue:#5aa7de;
-      --opText:#0b2a44;
     }
 
     body{
       margin:0;
       padding:16px;
       font-family:Arial, sans-serif;
-      background:#ffffff;
+      background:#fff;
       color:var(--text);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
@@ -90,7 +88,7 @@
     }
 
     .content{
-      background:#ffffff;
+      background:#fff;
       border-radius:16px;
       padding:20px;
       box-shadow:var(--shadow);
@@ -112,7 +110,7 @@
     }
     .content ul{ padding-left:18px; margin:8px 0 0 0; }
 
-    /* Окно выбора операции */
+    /* ===== Выбор операции: теперь как все остальные рамки (НЕ синий фон) ===== */
     .op-wrap{
       display:flex;
       justify-content:center;
@@ -121,26 +119,33 @@
     .op-box{
       width:100%;
       max-width:720px;
-      background:var(--opBlue);
-      color:#fff;
+      background:var(--soft);
       border:2px solid var(--border);
       border-radius:18px;
       padding:18px 16px;
-      box-shadow:var(--shadow);
     }
-
+    .op-title{
+      text-align:center;
+      font-size:18px;
+      font-weight:900;
+      margin:0 0 12px 0;
+      letter-spacing:0.2px;
+      line-height:1.25;
+      color:var(--text);
+    }
     .op-grid{
       display:grid;
       grid-template-columns:1fr;
       gap:10px;
     }
 
+    /* Кнопки операций — как обычные разделы */
     .op-btn{
-      background:transparent;
-      color:#fff;
-      border:2px solid rgba(255,255,255,0.85);
+      background:#fff;
+      color:var(--text);
+      border:2px solid var(--border);
       border-radius:14px;
-      padding:12px 12px;
+      padding:14px 12px;
       font-size:16px;
       font-weight:900;
       cursor:pointer;
@@ -148,13 +153,13 @@
       line-height:1.25;
     }
     .op-btn:hover{
-      background:rgba(255,255,255,0.14);
+      background:var(--soft2);
       transform:translateY(-1px);
     }
     .op-btn.active{
-      background:#ffffff;
-      color:var(--opText);
-      border-color:#ffffff;
+      background:#111;
+      color:#fff;
+      border-color:#111;
       transform:none;
     }
 
@@ -289,20 +294,7 @@
 
         <div class="op-wrap" id="opWrap">
           <div class="op-box">
-
-            <div class="op-title" style="
-              text-align:center;
-              font-size:18px;
-              font-weight:900;
-              margin:0 0 14px 0;
-              letter-spacing:0.2px;
-              line-height:1.25;
-              background:#ffffff;
-              color:#0b2a44;
-              border:2px solid #8fbce6;
-              border-radius:14px;
-              padding:12px 14px;
-            ">Выберите, какая операция выполнена</div>
+            <div class="op-title">Выберите, какая операция выполнена</div>
 
             <div class="op-grid">
               <button class="op-btn" data-op="distal">Субтотальная дистальная резекция желудка</button>
@@ -355,24 +347,23 @@
 
       centerElement(document.getElementById("postOpBox"));
 
-      // ✅ Делегирование: клики ловим одним обработчиком (не ломается при перерисовке)
+      // Делегирование + один обработчик на выбранную операцию (чтобы не копить)
       wrap.addEventListener("click", (e)=>{
         const btn = e.target.closest(".post-op");
         if (!btn) return;
 
         const sec = btn.dataset.post;
 
-        // подсветка активной кнопки
         wrap.querySelectorAll(".post-op").forEach(x=>x.classList.remove("active"));
         btn.classList.add("active");
 
-        // ✅ Физическая активность -> ВСЕГДА в отдельный файл
+        // Физическая активность -> всегда отдельный файл
         if (sec === "activity"){
           openActivity();
           return;
         }
 
-        // питание для distal — отдельной страницей (как было)
+        // питание для distal — отдельной страницей
         if (sec === "nutrition" && opKey === "distal"){
           window.location.href = DIET_PAGES.distal + "?from=pathology&p=" + encodeURIComponent(key);
           return;
@@ -382,7 +373,8 @@
         if (!postContent) return;
         postContent.innerHTML = "<p>Раздел будет добавлен позже.</p>";
         centerElement(postContent);
-      }, { once:true }); // ✅ чтобы не накапливать обработчики при повторном выборе операции
+
+      }, { once:true });
     }
 
     if (!DATA[key]){
