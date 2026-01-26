@@ -5,105 +5,111 @@
   <title>Питание после субтотальной дистальной резекции желудка</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
-      margin: 0;
-      padding: 16px;
-      font-family: Arial, sans-serif;
-      background-color: #ffffff;
-      color: #111;
-    }
-    .container { max-width: 980px; margin: 0 auto; }
+:root{
+  --border:#8fbce6;
+  --soft:#f4f9ff;
+  --soft2:#e9f3ff;
+  --text:#111;
+  --link:#1b6fb8;
+h3{
+  margin:12px 0 8px 0;
+  font-size:22px;
+  font-weight:900;
+}
+}
+body{
+  margin:0;
+  padding:16px;
+  font-family: Arial, sans-serif;
+  background:#ffffff;
+  color:var(--text);
+  line-height:1.5;
+  font-size:20px;
+}
+.container{ max-width:980px; margin:0 auto; }
 
-    .back-link {
-      display: inline-block;
-      margin-bottom: 18px;
-      text-decoration: none;
-      color: #111;
-      font-weight: 700;
-    }
+.back-link{
+  display:inline-block;
+  margin-bottom:18px;
+  text-decoration:none;
+  color:var(--text);
+  font-weight:700;
+  font-size:18px;
+}
 
-    h1 {
-      text-align: center;
-      font-size: 28px;
-      font-weight: 900;
-      margin: 6px 0 18px 0;
-    }
+h1{
+  text-align:center;
+  font-size:32px;
+  font-weight:900;
+  margin:6px 0 18px 0;
+}
 
-    .toc-box {
-      background-color: #f4f9ff;
-      border: 2px solid #8fbce6;
-      border-radius: 16px;
-      padding: 16px 14px;
-      margin: 14px 0 18px 0;
-    }
-    .toc-title {
-      text-align: center;
-      font-weight: 900;
-      margin-bottom: 10px;
-      font-size: 16px;
-    }
-    .toc-item {
-      padding: 6px 0;
-      border-top: 1px solid rgba(143,188,230,0.35);
-    }
-    .toc-item:first-of-type { border-top: none; }
-    .toc-link {
-      color: #0b2a44;
-      text-decoration: none;
-      font-weight: 800;
-      line-height: 1.35;
-      display: inline-block;
-    }
-    .toc-link:hover { text-decoration: underline; }
+/* Оглавление */
+.toc-box{
+  border:2px solid var(--border);
+  background:var(--soft);
+  border-radius:14px;
+  padding:16px 18px;
+  margin:0 0 18px 0;
+}
+.toc-title{
+  font-size:22px;
+  font-weight:900;
+  margin:0 0 8px 0;
+  text-align:left;
+}
+.toc-item{
+  padding:8px 0;
+  border-top:1px solid rgba(143,188,230,0.35);
+}
+.toc-item:first-of-type{ border-top:none; }
 
-    .content {
-      background-color: #ffffff;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-    }
+a{ color:var(--link); font-weight:900; text-decoration:none; }
+a:hover{ text-decoration:none; }
 
-    /* Текст */
-    .content p, .content li {
-      font-size: 16px;
-      line-height: 1.6;
-    }
+/* Основной контент — секции с голубой рамкой */
+.section{
+  border:2px solid var(--border);
+  background:#ffffff;
+  border-radius:14px;
+  padding:16px 18px;
+  margin:0 0 14px 0;
+  scroll-margin-top:14px;
+}
 
-    /* Маркеры "как в файле": списки вместо множества абзацев */
-    .bullets {
-      margin: 10px 0 12px 0;
-      padding-left: 22px;
-    }
-    .bullets li { margin: 6px 0; }
+/* Заголовки секций (в исходном файле были h3) */
+.section h3{
+  font-size:20px;
+  font-weight:900;
+  margin:0 0 10px 0;
+}
 
-    .numbers {
-      margin: 10px 0 12px 0;
-      padding-left: 22px;
-    }
-    .numbers li { margin: 8px 0; }
+p{ margin:10px 0; }
+.bullets, .numbers{ margin:10px 0 12px 0; padding-left:22px; }
+.bullets li{ margin:6px 0; }
+.numbers li{ margin:8px 0; }
 
-    /* Акценты */
-    .note {
-      font-weight: 900;
-    }
-    .lead {
-      font-weight: 900;
-    }
+/* Заметки "Важно!" — как в вашем стиле */
+.note{
+  background:var(--soft2);
+  border-left:6px solid var(--border);
+  padding:12px 14px;
+  border-radius:10px;
+  margin:12px 0;
+}
+.note strong{ font-weight:700; }
 
-    .diet-section {
-      scroll-margin-top: 14px;
-      margin-bottom: 18px;
-    }
-    .diet-section h3 {
-      font-size: 18px;
-      font-weight: 900;
-      margin: 14px 0 8px 0;
-    }
+/* Акценты, сохранены из файла */
+.lead{ font-weight:900; }
 
-    @media (max-width: 480px) {
-      body { padding: 12px; }
-      h1 { font-size: 24px; }
-    }
+@media (max-width:480px){
+  body{ padding:12px; font-size:16px; }
+  h1{ font-size:24px; }
+  .toc-title{ font-size:20px; }
+  .back-link{ font-size:16px; }
+  .section{ padding:14px 14px; }
+  .section h3{ font-size:20px; }
+}
   </style>
 </head>
 <body>
@@ -118,7 +124,7 @@
       <div class="toc-item">
         <a class="toc-link" href="#sec0">Какие изменения в функционировании пищеварительного тракта возникают после субтотальной резекции желудка?</a>
       </div>
-      <div class="toc-item"><a class="toc-link" href="#sec3">Задачи диеты</a></div>
+      <div class="toc-item"><a class="toc-link" href="#sec3">Кикие цели диеты?</a></div>
       <div class="toc-item"><a class="toc-link" href="#sec4">Почему нужно есть часто и маленькими порциями?</a></div>
       <div class="toc-item"><a class="toc-link" href="#sec7">Почему нельзя запивать еду?</a></div>
       <div class="toc-item"><a class="toc-link" href="#sec10">Почему белок — основа каждого приёма пищи?</a></div>
@@ -129,9 +135,9 @@
       <div class="toc-item"><a class="toc-link" href="#sec23">Почему постепенно нужно вводить молочную продукцию?</a></div>
     </div>
 
-    <div class="content">
+    <div>
 
-      <div class="diet-section" id="sec0">
+      <div class="section diet-section" id="sec0">
         <h3>Какие изменения в функционировании пищеварительного тракта возникают после субтотальной резекции желудка?</h3>
 
         <p class="lead">Удалена дистальная часть желудка — следовательно:</p>
@@ -141,11 +147,11 @@
           <li>потерян привратник — этот «клапан», регулирующий эвакуацию, удален. Пища и жидкость теперь быстро и бесконтрольно «сваливаются» (dumping — от англ. «сбрасывать») в тонкую кишку.</li>
         </ul>
 
-        <p><strong class="note">Важно!</strong> В норме из желудка в тонкую кишку за одно перистальтическое движение поступает около <strong>5 мл</strong> жидкости или жидкой пищи.</p>
+        <div class="note"><strong>Важно! В норме из желудка в тонкую кишку за одно перистальтическое движение поступает около <strong>5 мл</strong> жидкости или жидкой пищи.</strong></div>
         <p><strong>Главное изменение:</strong> желудок перестал быть временным хранилищем для поступившей пищи.</p>
       </div>
-
-      <div class="diet-section" id="sec1">
+ 
+      <div class="section diet-section" id="sec1">
         <h3>В норме желудок при поступлении пищи:</h3>
         <ul class="bullets">
           <li>растягивается и временно удерживает пищу;</li>
@@ -154,7 +160,7 @@
         </ul>
       </div>
 
-      <div class="diet-section" id="sec2">
+      <div class="section diet-section" id="sec2">
         <h3>После дистальной резекции:</h3>
         <ul class="bullets">
           <li>еда почти сразу попадает в тонкую кишку;</li>
@@ -165,7 +171,7 @@
         <p><strong>Чтобы его «не сломать», необходимо изменить правила питания.</strong></p>
       </div>
 
-      <div class="diet-section" id="sec3">
+      <div class="section diet-section" id="sec3">
         <h3>Задачи диеты</h3>
         <ul class="bullets">
           <li>предотвратить демпинг-синдром (ранний и поздний);</li>
@@ -174,11 +180,9 @@
         </ul>
       </div>
 
-      <div class="diet-section" id="sec4">
+      <div class="section diet-section" id="sec4">
         <h3>Почему нужно есть часто и маленькими порциями?</h3>
-      </div>
 
-      <div class="diet-section" id="sec5">
         <h3>Что происходит, если съесть большими порциями:</h3>
         <ul class="bullets">
           <li>пища не успевает пройти и так уже недостаточную обработку соляной кислотой и пепсином;</li>
@@ -186,9 +190,7 @@
           <li>жидкость из крови уходит в просвет кишки;</li>
           <li>падает давление: слабость, головокружение.</li>
         </ul>
-      </div>
-
-      <div class="diet-section" id="sec6">
+    
         <h3>Поэтому:</h3>
         <ul class="bullets">
           <li><strong>5–7</strong> приёмов пищи в день (в индивидуальных случаях количество приёмов может возрастать);</li>
@@ -198,20 +200,16 @@
         </ul>
       </div>
 
-      <div class="diet-section" id="sec7">
+      <div class="section diet-section" id="sec7">
         <h3>Почему нельзя запивать еду?</h3>
-      </div>
 
-      <div class="diet-section" id="sec8">
         <h3>Если пить во время еды:</h3>
         <ul class="bullets">
           <li>пища становится жидкой;</li>
           <li>быстрее покидает желудок, так как больше нет привратника, регулирующего постепенное поступление жидкой пищи в тонкую кишку;</li>
           <li>усиливается демпинг-синдром.</li>
         </ul>
-      </div>
-
-      <div class="diet-section" id="sec9">
+   
         <h3>Поэтому:</h3>
         <ul class="bullets">
           <li>пить за <strong>30 минут</strong> до еды или через <strong>60 минут</strong> после еды;</li>
@@ -220,19 +218,15 @@
         </ul>
       </div>
 
-      <div class="diet-section" id="sec10">
+      <div class="section diet-section" id="sec10">
         <h3>Почему белок — основа каждого приёма пищи?</h3>
-      </div>
 
-      <div class="diet-section" id="sec11">
         <h3>Белок:</h3>
         <ul class="bullets">
           <li>замедляет прохождение пищи: высокобелковая пища более вязкая → снижается интенсивность сброса (демпинга) в тонкую кишку;</li>
           <li><strong>основной строительный материал</strong> организма — без белка восстановление после операции затрудняется.</li>
         </ul>
-      </div>
-
-      <div class="diet-section" id="sec12">
+  
         <h3>Источники:</h3>
         <ul class="bullets">
           <li>нежирное мясо (курица, индейка, кролик, телятина) — в виде паровых котлет, тефтелей, суфле;</li>
@@ -241,29 +235,25 @@
           <li>мягкий творог (некислый), лучше в виде запеканок, суфле;</li>
           <li>орехи и ореховое масло.</li>
         </ul>
-        <p><strong class="note">Важно!</strong> Белок замедляет опорожнение желудка и снижает гликемический индекс пищи.</p>
+        <div class="note"><strong>Важно! Белок замедляет опорожнение желудка и снижает гликемический индекс пищи.</strong> </div>
       </div>
 
-      <div class="diet-section" id="sec13">
+      <div class="section diet-section" id="sec13">
         <h3>Почему нужно ограничить быстрые углеводы?</h3>
-        <p><strong class="note">Важно!</strong> У пациента могут возникнуть спазмы, боли в желудке или диарея через 20 минут после употребления продуктов или напитков с высоким содержанием сахара.</p>
-        <p><strong>Это называется</strong> ранний демпинг-синдром.</p>
-      </div>
+        <div class="note"><strong>Важно! У пациента могут возникнуть спазмы, боли в желудке или диарея через 20 минут после употребления продуктов или напитков с высоким содержанием сахара.</strong></div>
+        <p><strong>Это называется ранний демпинг-синдром.</strong></p>
 
-      <div class="diet-section" id="sec14">
         <h3>Причины:</h3>
         <ul class="bullets">
           <li>если вы съедите много пищи за один раз;</li>
           <li>если она будет содержать простые углеводы: они имеют высокую осмотическую активность и «вытягивают» воду из стенки кишки в её просвет.</li>
         </ul>
 
-        <p><strong class="note">Важно!</strong> Через 1.5–3 часа после приёма пищи у пациента может появиться: резкая слабость, дрожь, потливость, головокружение, чувство голода, сердцебиение, тревога, вплоть до потери сознания.</p>
-        <p><strong>Это называется</strong> поздний демпинг-синдром.</p>
+        <div class="note"><strong>Важно! Через 1.5–3 часа после приёма пищи у пациента может появиться: резкая слабость, дрожь, потливость, головокружение, чувство голода, сердцебиение, тревога, вплоть до потери сознания.</strong></div>
+        <p><strong>Это называется поздний демпинг-синдром.</strong></p>
 
         <p><strong>Причина:</strong> быстрое поступление концентрированной углеводной пищи в тонкую кишку → резкий скачок глюкозы (гипергликемия). В ответ поджелудочная железа выбрасывает избыточное количество инсулина. Глюкоза быстро утилизируется, а инсулина ещё много → глюкоза падает слишком низко (гипогликемия).</p>
-      </div>
-
-      <div class="diet-section" id="sec15">
+  
         <h3>Поэтому ограничиваются:</h3>
         <ul class="bullets">
           <li>сахар (даже тростниковый);</li>
@@ -305,11 +295,9 @@
         </ol>
       </div>
 
-      <div class="diet-section" id="sec16">
+      <div class="section diet-section" id="sec16">
         <h3>Какие углеводы можно?</h3>
-      </div>
 
-      <div class="diet-section" id="sec17">
         <h3>Разрешены:</h3>
         <ul class="bullets">
           <li>все крупы;</li>
@@ -318,7 +306,7 @@
         </ul>
       </div>
 
-      <div class="diet-section" id="sec18">
+      <div class="section diet-section" id="sec18">
         <h3>Почему жиры нужно вводить в рацион постепенно?</h3>
         <p>Организм пациентов с резецированным желудком всасывает не все жиры. Возможные симптомы:</p>
         <ul class="bullets">
@@ -327,9 +315,7 @@
           <li>стул очень светлого цвета, пенистый, жирный, или имеет резкий неприятный запах.</li>
         </ul>
         <p><strong>Поэтому</strong> необходимо постепенно вводить жиры в рацион.</p>
-      </div>
-
-      <div class="diet-section" id="sec19">
+>
         <h3>Нужно ограничивать и медленно вводить:</h3>
         <ul class="bullets">
           <li>тугоплавкие животные жиры: сало, грудинка, бекон, жирная свинина и баранина, утка, гусь;</li>
@@ -340,14 +326,12 @@
           <li>жирные кондитерские изделия (торты, пирожные с кремом), песочное тесто;</li>
           <li>цельное молоко и сливки (проблема и с жирами, и с лактозой).</li>
         </ul>
-        <p><strong class="note">Важно!</strong> Полный отказ от жиров приведет к дефициту жирорастворимых витаминов (A, D, E, K), ухудшит состояние кожи, гормональный фон и усугубит проблемы с желчным пузырем.</p>
+        <div class="note"><strong>Важно! Полный отказ от жиров приведет к дефициту жирорастворимых витаминов (A, D, E, K), ухудшит состояние кожи, гормональный фон и усугубит проблемы с желчным пузырем.</strong></div>
       </div>
 
-      <div class="diet-section" id="sec20">
+      <div class="section diet-section" id="sec20">
         <h3>Почему жиры вызывают диарею?</h3>
-      </div>
-
-      <div class="diet-section" id="sec21">
+  
         <h3>Основные механизмы, почему жир вызывает диарею после резекции желудка:</h3>
 
         <ol class="numbers">
@@ -398,7 +382,7 @@
         </ol>
       </div>
 
-      <div class="diet-section" id="sec22">
+      <div class="section diet-section" id="sec22">
         <h3>Как вводить жиры в рацион?</h3>
         <ul class="bullets">
           <li>начинайте с минимальных доз растительного масла (например, <strong>1/2 ч.л.</strong> оливкового масла в овощное пюре);</li>
@@ -408,7 +392,7 @@
         </ul>
       </div>
 
-      <div class="diet-section" id="sec23">
+      <div class="section diet-section" id="sec23">
         <h3>Почему постепенно нужно вводить молочную продукцию?</h3>
         <p>Лактоза содержится в молочных продуктах. У некоторых пациентов появляются симптомы непереносимости лактозы:</p>
         <ul class="bullets">
@@ -417,9 +401,7 @@
           <li>диарея.</li>
         </ul>
         <p>Они могут появляться в период от 30 минут до 2 часов после употребления молочных продуктов.</p>
-      </div>
 
-      <div class="diet-section" id="sec24">
         <h3>После операции постепенно вводите молочные продукты в свой рацион питания:</h3>
         <ul class="bullets">
           <li>молоко;</li>
@@ -429,7 +411,7 @@
           <li>сливочное масло.</li>
         </ul>
 
-        <p><strong class="note">Важно!</strong> Если вы подозреваете непереносимость лактозы, попробуйте полностью исключить все лактозосодержащие продукты на <strong>7–10 дней</strong>. Если состояние ЖКТ значительно улучшится — диагноз очень вероятен. Для подтверждения можно пройти водородный дыхательный тест с лактозой (предварительно проконсультируйтесь с гастроэнтерологом).</p>
+        <div class="note"><strong>Важно! Если вы подозреваете непереносимость лактозы, попробуйте полностью исключить все лактозосодержащие продукты на <strong>7–10 дней</strong>. Если состояние ЖКТ значительно улучшится — диагноз очень вероятен. Для подтверждения можно пройти водородный дыхательный тест с лактозой (предварительно проконсультируйтесь с гастроэнтерологом).</strong> </div>
       </div>
 
     </div>
